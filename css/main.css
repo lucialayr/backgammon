@@ -1,0 +1,20 @@
+.Player1 {
+    background: cadetblue;
+    display: inline;
+    position: relative;
+    top: -250px;
+}
+
+canvas{
+    background: grey;
+    border: 5pt solid black;
+}
+
+
+
+.Player2 {
+    background:cadetblue;
+    display: inline;
+    position: relative;
+    top: -250px;
+}
