@@ -32,6 +32,9 @@ var y = 0 // dynamical y
 var n = 0 // id of active piece
 
 //Functions
+
+//todo clean uo drawBoard
+
 function drawBoard(){ // draws empty board
     c.fillStyle = "black"; //horizontal seperation
     c.fillRect(0, 240, 500, 20); 
