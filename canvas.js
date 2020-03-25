@@ -1,11 +1,19 @@
-//board
+//Global Settings
 var canvas = document.querySelector("canvas");
-
 canvas.width = "500";
 canvas.height = "500";
-
 var c = canvas.getContext("2d");
-function drawBoard(){
+
+//Global Variables
+var initPos = [250, 480, 20, 20] // initial positions of pieces on board
+var position = initPos // current position of pieces on the board
+var N = position.length/2 //number of pieces on the board
+var x = 0 // dynamical x
+var y = 0 // dynamical y
+var n = 0 // id of active piece
+
+//Functions
+function drawBoard(){ // draws empty board
     c.fillStyle = "black"; //horizontal seperation
     c.fillRect(0, 240, 500, 20); 
 
@@ -71,9 +79,10 @@ function drawBoard(){
         }
     }
 
-function PieceW(x, y) {
+function PieceW(x, y, id) { //creates a white piece
     this.x =  x;
     this.y = y;
+    this.id = id;
     c.beginPath(); //outer circle
     c.arc(x, y, 19, 0, 2*Math.PI, false);
     c.strokeStyle = "black";
@@ -90,9 +99,10 @@ function PieceW(x, y) {
     c.stroke();
 }
 
-function PieceB(x, y) {
+function PieceB(x, y, id) { //creates a black piece
     this.x =  x;
     this.y = y;
+    this.id = id
     c.beginPath(); //outer circle
     c.arc(x, y, 15, 0, 2*Math.PI, false);
     c.strokeStyle = "black";
@@ -109,28 +119,55 @@ function PieceB(x, y) {
     c.stroke();
 }
 
-function UpdatePiece(x1, y1, x2, y2) {
-    c.clearRect(0,0, 500,500);
+function UpdatePiece(pos) { //updates positions of pieces on board
+    c.clearRect(0,0, 500,500); // clears canvas
     drawBoard();
-    piece = new PieceB(x1, y1);
-    piece_2 = new PieceW(x2, y2);
-    console.log("updated");
+    piece0 = new PieceB(pos[0],pos[0+N], 0);
+    piece1 = new PieceW(pos[1], pos[1+N], 1);
+    //console.log("updated");
+    console.log(position);
 }
 
-function timeFunction() {
-    setTimeout(function(){ console.log("test"); }, 5000);
+function InitBoard(initPos) { //sets pieces back to starting positions
+    UpdatePiece(initPos);
 }
 
-drawBoard();  
-piece = new PieceB(480, 480);
-piece_2 = new PieceW(439, 480);
+function getCursorPosition(canvas, event) { //gets x,y in canvas
+    const rect = canvas.getBoundingClientRect();
+    x = Math.round(event.clientX - rect.left);
+    y = Math.round(event.clientY - rect.top);
+    console.log("cursor positions: x= " + x + " y= " + y);
+}
+
+function selectPiece(){ //function picks up correct n 
+    n = 0
+    console.log("n before update: " + n);
+    getCursorPosition(canvas, event);
+    for (var i = 0; i<N; i++){
+        console.log("i=" + i);
+        if ( (Math.abs(x-position[i])<15) && (Math.abs(y-position[i+N])<15) ) {
+        n = i;        
+        }
+    }
+    console.log("n after update: " + n);
+}
+
+function movePiece(event) { 
+    //var n = 0; //would be set to object_id
+    getCursorPosition(canvas, event);
+    position[n] = x;
+    position[n+N] = y;
+    UpdatePiece(position);
+    //console.log(position);
+}
 
 
-x1 = 20;
-x2 = 20;
-y1 = 20;
-y2 = 250;
-UpdatePiece(x1,y1, x2, y2);
+//action on board begins:
+
+InitBoard(initPos);
+canvas.addEventListener("mousedown", selectPiece, false)
+canvas.addEventListener("mouseup", movePiece, false);
+
 
 
 
