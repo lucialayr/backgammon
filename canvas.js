@@ -5,7 +5,26 @@ canvas.height = "500";
 var c = canvas.getContext("2d");
 
 //Global Variables
-var initPos = [250, 480, 20, 20] // initial positions of pieces on board
+var base = 41.8 //base of a spike
+var seg =base/2 //half of //base of a spike
+var dia = 40 //diameter of a piece
+var rad = dia/2 // radius of a piece
+var initPos = [seg, seg, seg, seg, seg,  //x white
+    seg+4*base, seg+4*base, seg+4*base, 
+    seg+6*base, seg+6*base, seg+6*base, seg+6*base, seg+6*base,
+    480, 480, 
+    seg, seg, seg, seg, seg,  //x white
+    seg+4*base, seg+4*base, seg+4*base, 
+    seg+6*base, seg+6*base, seg+6*base, seg+6*base, seg+6*base,
+    480, 480, 
+    480, 480-dia, 480-dia*2, 480-dia*3, 480-dia*4, // y white
+    rad, rad+dia, rad+dia*2,
+    rad, rad+dia, rad+dia*2, rad+dia*3, rad+dia*4,
+    480, 480-dia,
+    rad, rad+dia, rad+dia*2, rad+dia*3, rad+dia*4, //y black
+    480, 480-dia, 480-dia*2,
+    480, 480-dia, 480-dia*2, 480-dia*3, 480-dia*4,
+    rad, rad+dia] // initial positions of pieces on board
 var position = initPos // current position of pieces on the board
 var N = position.length/2 //number of pieces on the board
 var x = 0 // dynamical x
@@ -122,8 +141,12 @@ function PieceB(x, y, id) { //creates a black piece
 function UpdatePiece(pos) { //updates positions of pieces on board
     c.clearRect(0,0, 500,500); // clears canvas
     drawBoard();
-    piece0 = new PieceB(pos[0],pos[0+N], 0);
-    piece1 = new PieceW(pos[1], pos[1+N], 1);
+    for (var i = 0; i<15; i++){
+        piece = new PieceB(pos[i], pos[i+N], i)
+    }
+    for (var i = 0; i<15; i++){
+        piece = new PieceW(pos[i+15], pos[i+15+N], i+15)
+    }
     //console.log("updated");
     console.log(position);
 }
@@ -139,9 +162,7 @@ function getCursorPosition(canvas, event) { //gets x,y in canvas
     console.log("cursor positions: x= " + x + " y= " + y);
 }
 
-function selectPiece(){ //function picks up correct n 
-    n = 0
-    console.log("n before update: " + n);
+function selectPiece(){ //selects piece by storing its id in n
     getCursorPosition(canvas, event);
     for (var i = 0; i<N; i++){
         console.log("i=" + i);
@@ -149,18 +170,15 @@ function selectPiece(){ //function picks up correct n
         n = i;        
         }
     }
-    console.log("n after update: " + n);
 }
 
-function movePiece(event) { 
-    //var n = 0; //would be set to object_id
+function movePiece(event) { // updates possiotn of piece with id = 1
     getCursorPosition(canvas, event);
     position[n] = x;
     position[n+N] = y;
     UpdatePiece(position);
     //console.log(position);
 }
-
 
 //action on board begins:
 
