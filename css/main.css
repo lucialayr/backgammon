@@ -10,22 +10,15 @@
     border: 5pt solid black;
 }
 
-
-
 .restart{
     position: relative;
-    top: -170px;
-    left: -300px;
+    top: -520px;
+    left: -450px;
 }
 
-.rollDice{
-    position: relative;
-    top: -170px;
-    left: -220px;
-}
 .dice{
     background: white;
-    border: 5pt solid black;
+    border: 2pt solid black;
     position: relative:
     top: -400px
 }

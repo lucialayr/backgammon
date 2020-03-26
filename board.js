@@ -1,5 +1,5 @@
 //Global Settings
-var canvas = document.querySelector("canvas");
+var canvas = document.querySelector(".board");
 canvas.width = "500";
 canvas.height = "500";
 var c = canvas.getContext("2d");
@@ -14,7 +14,7 @@ const initPos = [seg, seg, seg, seg, seg,  //x white
     seg+4*base, seg+4*base, seg+4*base, 
     seg+6*base, seg+6*base, seg+6*base, seg+6*base, seg+6*base,
     480, 480, 
-    seg, seg, seg, seg, seg,  //x white
+    seg, seg, seg, seg, seg,  //x black
     seg+4*base, seg+4*base, seg+4*base, 
     seg+6*base, seg+6*base, seg+6*base, seg+6*base, seg+6*base,
     480, 480, 
@@ -55,7 +55,7 @@ function drawBoard(){ // draws empty board
     c.lineTo(250, 0);
     c.stroke();
 
-    y = 0  //spikes upper half
+    y = 0  //stalactites
     x = 0 
     for (var i=0; i<6; i++){ 
         drawSpike("darkred",1)
@@ -67,7 +67,7 @@ function drawBoard(){ // draws empty board
         x += 2*base
         }
     
-    y = 500  //spikes lower half
+    y = 500  //stalacmites
     x = 0 
     for (var i=0; i<6; i++){
         drawSpike("darkred",-1)
@@ -94,7 +94,7 @@ function PieceW(x, y, id) { //creates a white piece
     c.beginPath(); //inner circle
     c.arc(x, y, 15/2, 0, 2*Math.PI, false);
     c.fillStyle = "firebrick";
-    c.strokestlye = "black";
+    c.strokeStyle = "black";
     c.lineWidth = 1;
     c.fill();
     c.stroke();
