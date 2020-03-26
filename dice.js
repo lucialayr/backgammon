@@ -54,10 +54,10 @@ function drawDice(x, y, n) { //selects a random number and draws face of the dic
 function rollDice() { //rolls both dice
     c2.clearRect(0,0,130,70); //complete canvas
     c2.strokeRect(10,10,50,50);  //first dice
-    var n = Math.floor(Math.random() * (6 - 1) + 1);
+    var n = Math.floor(Math.random() * (7 - 1) + 1);
     drawDice(35, 35, n);
     c2.strokeRect(70,10,50,50); //second dice
-    var n = Math.floor(Math.random() * (6 - 1) + 1);
+    var n = Math.floor(Math.random() * (7 - 1) + 1);
     drawDice(95, 35, n);
 }
 
