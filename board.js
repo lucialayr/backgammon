@@ -154,7 +154,7 @@ function selectPiece(){ //selects piece by storing its id in n
     }
 }
 
-function movePiece(event) { // updates possiotn of piece with id = 1
+function movePiece(event) { // updates possion of piece with id = 1
     getCursorPosition(canvas, event);
     position[n] = x;
     position[n+N] = y;

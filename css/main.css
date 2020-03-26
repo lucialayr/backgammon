@@ -5,12 +5,30 @@
     top: -250px;
 }
 
-canvas{
+.board {
     background:olivedrab;
     border: 5pt solid black;
 }
 
 
+
+.restart{
+    position: relative;
+    top: -170px;
+    left: -300px;
+}
+
+.rollDice{
+    position: relative;
+    top: -170px;
+    left: -220px;
+}
+.dice{
+    background: white;
+    border: 5pt solid black;
+    position: relative:
+    top: -400px
+}
 
 .Player2 {
     background:cadetblue;
